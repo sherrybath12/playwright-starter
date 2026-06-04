@@ -1,0 +1,35 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5
+
+jobs:
+  test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.52.0-jammy
+    resource_class: medium
+    steps:
+      - checkout
+
+      - node/install-packages:
+          pkg-manager: npm
+
+      - run:
+          name: Run API tests
+          command: npm run test:api
+
+      - run:
+          name: Run UI tests
+          command: npm run test:ui
+
+      - store_artifacts:
+          path: playwright-report
+          destination: playwright-report
+
+      - store_test_results:
+          path: test-results
+
+workflows:
+  regression:
+    jobs:
+      - test
