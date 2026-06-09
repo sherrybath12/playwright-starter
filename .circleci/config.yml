@@ -6,7 +6,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: mcr.microsoft.com/playwright:v1.52.0-jammy
+      - image: mcr.microsoft.com/playwright:v1.60.0-jammy
 
     resource_class: medium
 
