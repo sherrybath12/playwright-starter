@@ -11,16 +11,18 @@ jobs:
     steps:
       - checkout
 
-      - node/install-packages:
-          pkg-manager: npm
+        - run:
+          name: Install dependencies
+          command: |
+          npm ci
 
-      - run:
+        - run:
           name: Run API tests
-          command: npm run test:api
+          command: npm run test:api -- --reporter=list,junit
 
-      - run:
+        - run:
           name: Run UI tests
-          command: npm run test:ui
+          command: npm run test:ui -- --reporter=list,junit
 
       - store_artifacts:
           path: playwright-report
