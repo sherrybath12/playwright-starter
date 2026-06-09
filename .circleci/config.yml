@@ -7,20 +7,21 @@ jobs:
   test:
     docker:
       - image: mcr.microsoft.com/playwright:v1.52.0-jammy
+
     resource_class: medium
+
     steps:
       - checkout
 
-        - run:
+      - run:
           name: Install dependencies
-          command: |
-          npm ci
+          command: npm ci
 
-        - run:
+      - run:
           name: Run API tests
           command: npm run test:api -- --reporter=list,junit
 
-        - run:
+      - run:
           name: Run UI tests
           command: npm run test:ui -- --reporter=list,junit
 
